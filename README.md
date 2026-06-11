@@ -1,3 +1,30 @@
+# Automation Tool Lab
+
+This project demonstrates a simple automation script that fetches data from a public API and writes it to a timestamped log file.
+
+Usage
+
+1. (Optional) Create and activate a virtual environment.
+2. Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+3. Run the script:
+
+```bash
+python -m lib.generate_log
+```
+
+Or import `generate_log` from `lib.generate_log` and call `generate_log(data)` from your own code.
+
+Files of interest
+
+- `lib/generate_log.py`: contains `generate_log(data)`, `fetch_data()`, and a CLI entry.
+- `requirements.txt`: lists installed dependencies.
+- `testing/test_generate_log.py`: unit tests for `generate_log()`.
+
 
 # Module Lab: Automating Python Projects with Pip, PyPi & Scripting
 
