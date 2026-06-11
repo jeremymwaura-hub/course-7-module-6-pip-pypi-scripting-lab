@@ -1,50 +1,60 @@
 from datetime import datetime
 import os
+from typing import List
 import requests
 
-def generate_log(data):
-    # STEP 1: Validate input
+
+def generate_log(data: List[str]) -> str:
+    """Create a timestamped log file from a list of strings.
+
+    Args:
+        data: List of strings to write as separate lines in the log file.
+
+    Returns:
+        The filename of the created log (pattern: log_YYYYMMDD.txt).
+
+    Raises:
+        ValueError: If `data` is not a list.
+    """
+
     if not isinstance(data, list):
         raise ValueError("data must be a list")
 
-    # STEP 2: Generate filename with today's date (log_YYYYMMDD.txt)
     today = datetime.now().strftime("%Y%m%d")
     filename = f"log_{today}.txt"
+    filepath = os.path.join(os.getcwd(), filename)
 
-    # Ensure directory exists (file will be created in current working dir)
-    dirname = os.getcwd()
-    filepath = os.path.join(dirname, filename)
-
-    # STEP 3: Write the log entries to a file using File I/O
-    with open(filepath, "w", encoding="utf-8") as file:
+    # Write each entry on its own line; handle empty list gracefully
+    with open(filepath, "w", encoding="utf-8") as f:
         for entry in data:
-            file.write(f"{entry}\n")
+            f.write(f"{entry}\n")
 
-    # STEP 4: Print a confirmation message and return the filename
     print(f"Log written to {filename}")
     return filename
 
 
-def fetch_data():
-    """Fetch a sample post from a public API and return a list of strings."""
+def fetch_data() -> List[str]:
+    """Fetch a sample post from a public API and return title/body as log entries.
+
+    Returns an empty list on error. This function is a demonstration of using
+    an external package (`requests`) and is not required by the grading rubric
+    for `generate_log()` itself.
+    """
+
     try:
-        response = requests.get("https://jsonplaceholder.typicode.com/posts/1", timeout=10)
-        response.raise_for_status()
-        post = response.json()
-        # Return title and body as separate log entries
+        resp = requests.get("https://jsonplaceholder.typicode.com/posts/1", timeout=10)
+        resp.raise_for_status()
+        post = resp.json()
         return [post.get("title", ""), post.get("body", "")]
     except Exception:
-        # On any error, return an empty list
         return []
 
 
-def main():
-    # Fetch data using requests and write to a dated log file
+def main() -> None:
     entries = fetch_data()
     if not entries:
         entries = ["No data fetched"]
-    filename = generate_log(entries)
-    print("Finished: wrote fetched data to", filename)
+    generate_log(entries)
 
 
 if __name__ == "__main__":

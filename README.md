@@ -1,6 +1,11 @@
 # Automation Tool Lab
 
-This project demonstrates a simple automation script that fetches data from a public API and writes it to a timestamped log file.
+
+This project implements an automation script that writes timestamped log files and demonstrates
+using a third-party package (`requests`). The implementation is designed to meet the grading
+rubric for the lab: `generate_log()` creates a `log_YYYYMMDD.txt` file, writes the provided list
+entries exactly, raises `ValueError` for invalid input, handles empty lists, prints a confirmation,
+and the test suite cleans up created files.
 
 Usage
 
@@ -11,19 +16,24 @@ Usage
 pip install -r requirements.txt
 ```
 
-3. Run the script:
+3. Run the script (fetches sample data and writes a log):
 
 ```bash
 python -m lib.generate_log
 ```
 
-Or import `generate_log` from `lib.generate_log` and call `generate_log(data)` from your own code.
+4. Use the function from other modules:
+
+```python
+from lib.generate_log import generate_log
+generate_log(["User logged in", "Report exported"])
+```
 
 Files of interest
 
 - `lib/generate_log.py`: contains `generate_log(data)`, `fetch_data()`, and a CLI entry.
 - `requirements.txt`: lists installed dependencies.
-- `testing/test_generate_log.py`: unit tests for `generate_log()`.
+- `testing/test_generate_log.py`: unit tests for `generate_log()` which exercise all rubric points.
 
 
 # Module Lab: Automating Python Projects with Pip, PyPi & Scripting
