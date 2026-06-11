@@ -1,28 +1,27 @@
 # Automation Tool Lab
 
 
-This project implements an automation script that writes timestamped log files and demonstrates
-using a third-party package (`requests`). The implementation is designed to meet the grading
-rubric for the lab: `generate_log()` creates a `log_YYYYMMDD.txt` file, writes the provided list
-entries exactly, raises `ValueError` for invalid input, handles empty lists, prints a confirmation,
-and the test suite cleans up created files.
+
+This project implements an automation script that writes timestamped log files.
+
+The implementation is designed to meet the grading rubric for the lab:
+- `generate_log()` creates a `log_YYYYMMDD.txt` file.
+- The filename follows `log_YYYYMMDD.txt`.
+- File contents exactly match the input list.
+- Raises `ValueError` for invalid (non-list) input.
+- Handles empty lists by creating an empty file.
+- Prints a confirmation message including the filename.
 
 Usage
 
 1. (Optional) Create and activate a virtual environment.
-2. Install dependencies:
+2. Install dependencies (none required for the minimal implementation):
 
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Run the script (fetches sample data and writes a log):
-
-```bash
-python -m lib.generate_log
-```
-
-4. Use the function from other modules:
+3. Use the function from other modules:
 
 ```python
 from lib.generate_log import generate_log
@@ -31,8 +30,8 @@ generate_log(["User logged in", "Report exported"])
 
 Files of interest
 
-- `lib/generate_log.py`: contains `generate_log(data)`, `fetch_data()`, and a CLI entry.
-- `requirements.txt`: lists installed dependencies.
+- `lib/generate_log.py`: contains `generate_log(data)` matching the rubric.
+- `requirements.txt`: intentionally minimal (no external dependencies required).
 - `testing/test_generate_log.py`: unit tests for `generate_log()` which exercise all rubric points.
 
 
